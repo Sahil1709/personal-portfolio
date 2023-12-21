@@ -1,8 +1,9 @@
 import { client } from '$lib/sanity.js';
 
-export async function load({ params }) {
+export const load = async ({ params }) => {
     return {
         personalInfo: await client.fetch('*[_type == "personalInfo"][0]'),
-        universities: await client.fetch('*[_type == "education"] | order(from) [0...2]'),
+        universities: await client.fetch('*[_type == "education"] | order(from desc) [0...2]'),
+        experiences: await client.fetch('*[_type == "experience"] | order(from desc) [0...2]'),
     }
 }
