@@ -1,6 +1,5 @@
 <script lang="ts">
 	export let data;
-	console.log(data);
 </script>
 
 <!-- =====PERSONAL INFO===== -->
@@ -41,9 +40,13 @@
 		>EXPERIENCES</a
 	>
 </div>
+
 {#each data.experiences as exp}
 	<li>
-		{exp.role} - {exp.companyName}
+		<span class="font-bold text-lg">{exp.role} - {exp.companyName}</span>
 		{new Date(exp.from).toDateString()} - {new Date(exp.to).toDateString()}
+		{#each exp.description as desc}
+			<li class="ml-4">{desc}</li>
+		{/each}
 	</li>
 {/each}
