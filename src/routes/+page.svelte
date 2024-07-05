@@ -1,11 +1,12 @@
 <script lang="ts">
 	export let data;
+	console.log(data)
 </script>
 
 <!-- =====PERSONAL INFO===== -->
 <div class="tooltip tooltip-right tooltip-accent" data-tip="Click to know more about me :)">
 	<a href="/about" class="font-bold text-2xl ease-in duration-200 hover:text-3xl hover:text-accent"
-		>{data.personalInfo.firstName} {data.personalInfo.lastName}</a
+		>{data.personalInfo?.firstName} {data.personalInfo?.lastName}</a
 	>
 </div>
 <br />
@@ -25,7 +26,10 @@
 	>
 </div>
 {#each data.universities as uni}
-	<li>{uni.universityName} {new Date(uni.from).toDateString()}</li>
+		<div>
+			{uni.schoolName} - {uni.degree} in {uni.coursework} <br>
+			{new Date(uni.startDate).toLocaleString('en-US', { month: 'long', year: 'numeric' })} - {new Date(uni.endDate).toLocaleString('en-US', { month: 'long', year: 'numeric' })}
+		</div>
 {/each}
 
 <!-- =====EXPERIENCES===== -->
@@ -37,16 +41,17 @@
 	<a
 		href="/experience"
 		class="font-bold text-xl ease-in duration-200 hover:text-2xl hover:text-accent underline"
-		>EXPERIENCES</a
-	>
+		>
+		EXPERIENCES
+	</a>
 </div>
 
 {#each data.experiences as exp}
 	<li>
 		<span class="font-bold text-lg">{exp.role} - {exp.companyName}</span>
-		{new Date(exp.from).toDateString()} - {new Date(exp.to).toDateString()}
-		{#each exp.description as desc}
-			<li class="ml-4">{desc}</li>
-		{/each}
+		{new Date(exp.startDate).toDateString()} - {new Date(exp.endDate).toDateString()}
+		{#if exp.description}
+			<p>{exp.description}</p>
+		{/if}
 	</li>
 {/each}
