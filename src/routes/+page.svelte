@@ -1,6 +1,12 @@
 <script lang="ts">
+	import {PortableText} from '@portabletext/svelte'
+
 	export let data;
-	console.log(data)
+	// console.log(data)
+	
+	data.experiences[0].description.forEach((desc) => {
+		console.log(desc)
+	})
 </script>
 
 <!-- =====PERSONAL INFO===== -->
@@ -51,7 +57,32 @@
 		<span class="font-bold text-lg">{exp.role} - {exp.companyName}</span>
 		{new Date(exp.startDate).toDateString()} - {new Date(exp.endDate).toDateString()}
 		{#if exp.description}
-			<p>{exp.description}</p>
+			<PortableText value={exp.description} />
 		{/if}
+	</li>
+{/each}
+
+<!-- =====PROJECTS===== -->
+<div class="divider divider-neutral"></div>
+<div
+	class="tooltip tooltip-right tooltip-accent"
+	data-tip="Get a deeper dive into my projects :)"
+>
+	<a
+		href="/experience"
+		class="font-bold text-xl ease-in duration-200 hover:text-2xl hover:text-accent underline"
+		>
+		PROJECTS
+	</a>
+</div>
+
+{#each data.projects as project}
+	<li>
+		<span class="font-bold text-lg">{project.projectName} </span>
+		{new Date(project.startDate).toDateString()} - {new Date(project.endDate).toDateString()}
+		{#if project.description}
+			<p>{project.description}</p>
+		{/if}	
+		
 	</li>
 {/each}

@@ -1,5 +1,4 @@
 <script>
-	import {PortableText} from '@portabletext/svelte'
 	export let data;
 	let imgUrl = data.personalInfo.imageUrl;
 	console.log(data.personalInfo);
@@ -17,5 +16,5 @@
 			<img src={imgUrl} alt="My pic" />
 		</div>
 	</div>
-	<PortableText value={data.personalInfo.description} />
+	<p class="mt-4 text-gray-600">{data.personalInfo.firstName}</p>
 </div>
